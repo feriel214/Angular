@@ -1,0 +1,21 @@
+<div class="container">
+    <h3>Add Person</h3>
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id="name" [(ngModel)]="data.lastname" placeholder="Enter Name">
+    </div>
+    <div class="form-group">
+        <label for="age">Age</label>
+        <input type="number" id="age" class="form-control" [(ngModel)]="data.age" placeholder="Age">
+    </div>
+    <div class="form-group">
+        <label for="number">Number</label>
+        <input type="number" id="number" class="form-control" [(ngModel)]="data.number" placeholder="Number">
+    </div>
+    <div class="form-group">
+        <label for="country">Country</label>
+        <input type="text" id="country" class="form-control" [(ngModel)]="data.country" placeholder="Country">
+    </div>
+    <button type="submit" class="btn btn-primary" (click)="submitForm()">Add</button>
+    <button type="submit" class="btn btn-warning ml-1" [routerLink]="[ '/list/person']">Cancel</button>
+</div>
