@@ -30,7 +30,7 @@ export class PersonEditComponent implements OnInit {
   }
   update() {
     //Update item by taking id and updated data object
-    this.rest.editPerson(this.id, this.data).subscribe(response => {
+    this.rest.editPerson().subscribe(response => {
       this.router.navigate(['list/person']);
     })
   }

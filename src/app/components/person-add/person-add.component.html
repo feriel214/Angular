@@ -1,21 +1,28 @@
-<div class="container">
-    <h3>Add Person</h3>
-    <div class="form-group">
-        <label for="name">Name</label>
-        <input type="text" class="form-control" id="name" [(ngModel)]="data.lastname" placeholder="Enter Name">
+<form #form="ngForm" (submit)="onSubmit(form)">
+    <div class="container">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" name="lastname" class="form-control" #lastname="ngModel" id="name" [(ngModel)]="rest.formData.lastname" placeholder="Enter Name">
+        </div>
+        <div class="form-group">
+            <label for="age">Age</label>
+            <input type="number" id="age" name="age" #age="ngModel" class="form-control" [(ngModel)]="rest.formData.age" placeholder="Age">
+        </div>
+        <div class="form-group">
+            <label for="number">Number</label>
+            <input type="number" id="number" name="number" #number="ngModel" class="form-control" [(ngModel)]="rest.formData.number" placeholder="Number">
+        </div>
+        <div class="form-group">
+            <label for="country">Country</label>
+            <input type="text" id="country" name="country" #country="ngModel" class="form-control" [(ngModel)]="rest.formData.country" placeholder="Country">
+        </div>
+        <div *ngIf="rest.Disable; then thenblock else elseBlock"></div>
+        <ng-template #thenblock>
+            <button type="submit" class="btn btn-success">Update</button>
+        </ng-template>
+        <ng-template #elseBlock>
+            <button type="submit" class="btn btn-primary" (click)="onSubmit(form)">Add</button>
+        </ng-template>
+        <button type="reset" class="btn btn-warning ml-1" (click)="Cancel()">Cancel</button>
     </div>
-    <div class="form-group">
-        <label for="age">Age</label>
-        <input type="number" id="age" class="form-control" [(ngModel)]="data.age" placeholder="Age">
-    </div>
-    <div class="form-group">
-        <label for="number">Number</label>
-        <input type="number" id="number" class="form-control" [(ngModel)]="data.number" placeholder="Number">
-    </div>
-    <div class="form-group">
-        <label for="country">Country</label>
-        <input type="text" id="country" class="form-control" [(ngModel)]="data.country" placeholder="Country">
-    </div>
-    <button type="submit" class="btn btn-primary" (click)="submitForm()">Add</button>
-    <button type="submit" class="btn btn-warning ml-1" [routerLink]="[ '/list/person']">Cancel</button>
-</div>
+</form>
