@@ -10,37 +10,43 @@ import { NgForm } from '@angular/forms'
   styleUrls: ['./person-add.component.css'],
 })
 export class PersonAddComponent implements OnInit {
+  constructor(public rest: RestService, public router: Router) {}
 
-  constructor(private rest: RestService,public router: Router ) {}
-    
   ngOnInit(): void {
     this.rest.ResetForm()
   }
-   //Add Or Update Person 
+  //Add Or Update Person
   onSubmit(form: NgForm) {
     if (this.rest.formData.id == 0) {
       this.submitForm(form)
       this.rest.Disable = true
     } else this.update(form)
-  }
-   //Add Prson
+  } 
+  //Add Prson
   submitForm(form: NgForm) {
     this.rest.addPerson()
-    
+
   }
-  //Update Person 
+  //Update 
   update(form: NgForm) {
+    console.log("this. is our edit");
     this.rest.editPerson().subscribe(
       res => {
-        this.rest.ResetForm(form)
+        console.log(res)
+        console.log("hiii")
+       // 
         this.rest.Disable = true
+        this.rest.formData=res
+        this.rest.ResetForm(form)
       },
       err => {
         console.log(err)
       },
     )
+ 
   }
-  // Cancel the ADD or the update 
+ 
+  // Cancel the ADD or the update
   Cancel() {
     this.rest.formData = {
       id: 0,

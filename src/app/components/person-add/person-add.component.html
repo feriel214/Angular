@@ -16,13 +16,7 @@
             <label for="country">Country</label>
             <input type="text" id="country" name="country" #country="ngModel" class="form-control" [(ngModel)]="rest.formData.country" placeholder="Country">
         </div>
-        <div *ngIf="rest.Disable; then thenblock else elseBlock"></div>
-        <ng-template #thenblock>
-            <button type="submit" class="btn btn-success">Update</button>
-        </ng-template>
-        <ng-template #elseBlock>
-            <button type="submit" class="btn btn-primary" (click)="onSubmit(form)">Add</button>
-        </ng-template>
+        <button type="submit" class="btn btn-primary">Submit</button>
         <button type="reset" class="btn btn-warning ml-1" (click)="Cancel()">Cancel</button>
     </div>
 </form>

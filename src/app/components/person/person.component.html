@@ -1,23 +1,6 @@
 <div class="table-data__tool">
     <div class="table-data__tool-left">
-        <div class="rs-select2--light rs-select2--md">
-            <select class="js-select2" name="property">
-                <option selected="selected">All Properties</option>
-                <option value="">Option 1</option>
-                <option value="">Option 2</option>
-            </select>
-            <div class="dropDownSelect2"></div>
-        </div>
-        <div class="rs-select2--light rs-select2--sm">
-            <select class="js-select2" name="time">
-                <option selected="selected">Today</option>
-                <option value="">3 Days</option>
-                <option value="">1 Week</option>
-            </select>
-            <div class="dropDownSelect2"></div>
-        </div>
-        <button class="au-btn-filter">
-            <i class="zmdi zmdi-filter-list"></i>filters</button>
+
     </div>
 
 </div>
@@ -36,9 +19,9 @@
 
                 </tr>
         </thead>
-        <tbody>
+        <tbody id="tableau">
             <tr class="tr-shadow">
-                <tr *ngFor="let item of personsData">
+                <tr *ngFor="let item of personsData;let i = index;">
                     <td>{{item.id}}</td>
                     <td>{{item.lastname}}</td>
                     <td>{{item.age}}</td>
@@ -50,7 +33,7 @@
                             <button class="item" data-toggle="tooltip" data-placement="top" (click)="getPersonInfos(item)" title="Edit">
                                 <i class="zmdi zmdi-edit"></i>
                             </button>
-                            <button class="item" data-toggle="tooltip" (click)="delete(item)" data-placement="top" title="Delete">
+                            <button class="item" data-toggle="tooltip" (click)="delete(item,i)" data-placement="top" title="Delete">
                                 <i class="zmdi zmdi-delete"></i>
                             </button>
                         </div>

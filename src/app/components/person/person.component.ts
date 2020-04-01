@@ -1,11 +1,7 @@
 import { Person } from 'src/app/models/Person'
 import { RestService } from 'src/app/rest.service'
-import { Component,OnInit } from '@angular/core'
-import { Observable } from "rxjs";
-import { Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { Router } from '@angular/router';
-
+import { Component, OnInit } from '@angular/core'
+import { Subscription } from 'rxjs'
 
 @Component({
   selector: 'app-person',
@@ -14,30 +10,39 @@ import { Router } from '@angular/router';
 })
 export class PersonComponent implements OnInit {
   personsData: any
-  
-  constructor(private rest: RestService,private router: Router) { 
-    this.getAllPersons();
-   }
-
-  ngOnInit(): void {}
-  //Get list of all persons 
-  getAllPersons() {
-    
-    this.rest.getListPerson().subscribe(response => {
-      console.log(response)
-      this.personsData = response
+  subscription: Subscription
+  taille: number
+  constructor(public rest: RestService) {
+    this.getAllPersons()
+    this.subscription = this.rest.getMessage().subscribe(personBody => {
+      if (personBody) {
+        this.taille++
+        personBody.id = this.taille
+        console.log('personBody', personBody)
+        this.personsData.push(personBody)
+      }
     })
   }
 
-  delete(item) {
-    //Delete item in Student data
-    this.rest.deletePerson(item.id)
-    this.getAllPersons()  
+  ngOnInit(): void {}
+  //Get list of all persons
+  getAllPersons() {
+    this.rest.getListPerson().subscribe(response => {
+      console.log(response)
+      this.personsData = response
+      var obj = JSON.parse(JSON.stringify(response))
+      this.taille = parseInt(obj[obj.length - 1].id)
+    })
   }
 
-  
-  getPersonInfos(item: Person) {
-    this.rest.formData = item
+  delete(pers, index) {
+    //Delete item in Student data
+    this.rest.deletePerson(pers.id)
+    this.personsData.splice(index, 1)
+  }
+
+  getPersonInfos(pers: Person) {
+    this.rest.formData = pers
     this.rest.Disable = false
   }
 }
